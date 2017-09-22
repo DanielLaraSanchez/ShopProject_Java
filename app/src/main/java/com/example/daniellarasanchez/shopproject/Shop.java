@@ -32,6 +32,26 @@ public class Shop  {
         return this.funds;
     }
 
+    public int getTotalSales(){
+        int total = 0;
+        for(Sale sale : this.sales )
+            total += sale.getAmount();
+        return total;
+    }
+
+    public int getTotalRefunds(){
+        int total = 0;
+        for(Refund refund : this.refunds )
+            total += refund.getAmount();
+        return total;
+    }
+
+    public int getProfitOfShop(){
+        int result = getTotalSales() - getTotalRefunds();
+        return result;
+
+    }
+
 
 
 
