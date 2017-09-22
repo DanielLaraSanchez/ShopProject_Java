@@ -46,6 +46,16 @@ public class ShopTest {
         assertEquals(880, customer.getFunds());
     }
 
+  
+
+    @Test
+    public void canIncreaseFundsOfShopAfterSale(){
+        shop.chargeCustomer(120, customer);
+        assertEquals(120, shop.getFunds());
+    }
+
+
+
 
 
 
@@ -64,6 +74,13 @@ public class ShopTest {
         shop.refundCustomer(120, customer);
         assertEquals(1120, customer.getFunds());
     }
+    @Test
+    public void subtractAmountFromShopAfterRefund(){
+        shop.refundCustomer(120,customer);
+        assertEquals(-120, shop.getFunds());
+    }
+
+
 
 
 

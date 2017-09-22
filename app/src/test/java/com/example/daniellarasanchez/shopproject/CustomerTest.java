@@ -15,7 +15,7 @@ public class CustomerTest {
 
     @Before
     public void before(){
-        customer = new Customer(100);
+        customer = new Customer("Daniel", 100);
     }
 
     @Test

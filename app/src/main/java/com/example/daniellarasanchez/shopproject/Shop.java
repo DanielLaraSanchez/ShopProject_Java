@@ -11,11 +11,12 @@ public class Shop  {
 
      ArrayList<Sale> sales;
      ArrayList<Refund> refunds;
-
+     int funds;
 
     public Shop(){
         this.sales = new ArrayList<Sale>();
         this.refunds = new ArrayList<Refund>();
+        this.funds = 0;
     }
 
 
@@ -27,18 +28,18 @@ public class Shop  {
     public ArrayList<Refund> getRefunds() {
         return refunds;
     }
+    public int getFunds(){
+        return this.funds;
+    }
+
 
 
 
     public void canAddSale(Sale sale, Customer customer){
         this.sales.add(sale);
         chargeCustomer(sale.getAmount(), customer);
-    }
 
-    public void chargeCustomer(int amount, Customer customer){
-        customer.charge(amount);
     }
-
 
 
     public void canAddRefund(Refund refund, Customer customer){
@@ -47,11 +48,22 @@ public class Shop  {
 
     }
 
-    public void refundCustomer(int amount, Customer customer){
-        customer.recieveRefund(amount);
+
+
+    public void chargeCustomer(int amount, Customer customer){
+        customer.charge(amount);
+        this.funds += amount;
+
     }
 
-    
+    public void refundCustomer(int amount, Customer customer){
+        customer.recieveRefund(amount);
+        this.funds -= amount;
+    }
+
+
+
+
 
 
 
