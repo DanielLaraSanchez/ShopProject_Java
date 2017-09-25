@@ -2,7 +2,6 @@ package com.example.daniellarasanchez.shopproject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by daniellarasanchez on 22/09/2017.
@@ -118,16 +117,17 @@ public class Shop  {
 
 
 
-
-
     public void chargeCustomer(int amount, Customer customer){
-        if(customer.getPaymentMethod() != PaymentMethod.CREDITCARD){
-            customer.charge(amount);//this method calls the "hability" of customer to be charged.
-            this.funds += amount;
-        }else{
-            PaymentMethod.CREDITCARD.addAmountToDebt(amount);//this method calls the "hability" of Paymentmethod to increase the debt.
-            this.funds += amount;
-        }
+        customer.charge(amount);//this method calls the "hability" of customer to be charged.
+        this.funds += amount;
+        if(customer.choosePaymentType() != PaymentType.)
+        if(customer.getPaymentType() != PaymentType.CREDITCARD){
+//            customer.charge(amount);//this method calls the "hability" of customer to be charged.
+//            this.funds += amount;
+//        }else{
+//            PaymentType.CREDITCARD.addAmountToDebt(amount);//this method calls the "hability" of Paymentmethod to increase the debt.
+//            this.funds += amount;
+//        }
     }
 
 

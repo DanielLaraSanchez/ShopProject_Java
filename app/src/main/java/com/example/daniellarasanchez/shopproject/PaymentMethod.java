@@ -1,47 +1,46 @@
 package com.example.daniellarasanchez.shopproject;
 
 /**
- * Created by daniellarasanchez on 23/09/2017.
+ * Created by daniellarasanchez on 25/09/2017.
  */
 
-public enum PaymentMethod {
+public class PaymentMethod {
+    private int accountNumber;
+    private int debt;
+    private PaymentType paymentType;
 
-
-        DEBITCARD(1234566),
-        CREDITCARD(7877676),
-        CASH();
-
-         PaymentMethod() {
-
-        }
-
-         PaymentMethod(int accountNumber) {
-            this.accountNumber = accountNumber;
-             this.debt = 0;
-
-         }
-
-
-        public int accountNumber;
-        public int debt;
-
-
-
-        public int getDebt(){
-            return this.debt;
-        }
-
-        public void addAmountToDebt(int amount){
-            this.debt += amount;
-        }
-
-        public void setDebt(int newDebt){
-            this.debt = newDebt;
-        }
-
-
+    PaymentMethod(int accountNumber, PaymentType paymentType) {
+        this.accountNumber = accountNumber;
+        this.debt = 0;
+        this.paymentType = paymentType ;
     }
 
+   public void cashPaymentType(){
 
+   }
 
+    public PaymentType getPaymentType(){
+        return this.paymentType;
+    }
+
+    public int getAccountNumber(){
+        return this.accountNumber;
+    }
+
+    public int getDebt(){
+        return this.debt;
+    }
+
+    public void addAmountToDebt(int amount){
+        this.debt += amount;
+    }
+
+    public void setDebt(int newDebt){
+        this.debt = newDebt;
+    }
+
+    public void setPaymentType(PaymentType paymentType){
+        this.paymentType = paymentType;
+    }
+}
 
