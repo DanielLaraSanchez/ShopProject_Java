@@ -11,15 +11,32 @@ import static org.junit.Assert.assertEquals;
 
 public class CustomerTest {
     Customer customer;
+    Customer customer1;
+    Sale sale1;
+    Shop shop;
+
 
 
     @Before
     public void before(){
-        customer = new Customer("Daniel", 100);
+        customer = new Customer("Daniel", 100, PaymentMethod.CASH);
+        customer1 = new Customer("Dan", 200, PaymentMethod.CREDITCARD);
+        sale1 = new Sale(100);
+        shop = new Shop();
+
+
     }
 
     @Test
     public void canGetFunds(){
         assertEquals(100, customer.getFunds());
+
+    }
+
+    @Test
+    public void canPayOffDebt(){
+        shop.canAddSale(sale1, customer1);
+        customer1.payOffDebt(PaymentMethod.CREDITCARD);
+        assertEquals(100, customer1.getFunds());
     }
 }

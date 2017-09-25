@@ -1,8 +1,5 @@
 package com.example.daniellarasanchez.shopproject;
 
-import android.icu.text.DateTimePatternGenerator;
-
-import java.sql.Time;
 
 import java.util.Date;
 
@@ -12,11 +9,32 @@ import java.util.Date;
 
 public class Sale {
     private int amount;
+    private Date date;
+    private Product product;
+    private Integer quantity;
 
+
+
+    public Sale(int amount, Product product){
+        this.amount = amount;
+        this.date = new Date();
+        this.product = product;
+    }
 
     public Sale(int amount){
         this.amount = amount;
+        this.date = new Date();
+
     }
+
+    public Sale(int amount, Product product, Integer quantity){
+        this.amount = amount;
+        this.date = new Date();
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+
 
     public int getAmount(){
         return this.amount;
@@ -25,6 +43,20 @@ public class Sale {
     public void setAmount(int amount){
         this.amount = amount;
     }
+
+    public Date getDate(){
+        return this.date;
+    }
+
+    public Product getProduct(){
+        return this.product;
+    }
+
+    public Integer getQuantity(){
+        return this.quantity;
+    }
+
+
 
 
 }

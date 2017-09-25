@@ -7,11 +7,14 @@ package com.example.daniellarasanchez.shopproject;
 public class Customer  {
     private int funds;
     private String name;
+    private PaymentMethod paymentMethod;
 
 
-    public Customer(String name, int funds){
+
+    public Customer(String name, int funds, PaymentMethod paymentMethod){
         this.name = name;
         this.funds = funds;
+        this.paymentMethod = paymentMethod;
     }
 
     public String getName(){
@@ -22,6 +25,16 @@ public class Customer  {
         return this.funds;
     }
 
+    public PaymentMethod getPaymentMethod(){
+        return this.paymentMethod;
+    }
+
+
+
+    public void payOffDebt(PaymentMethod creditCard){
+        this.funds -= creditCard.debt;
+    }
+
 
     public void charge(int amount){
         this.funds -= amount;
@@ -30,6 +43,8 @@ public class Customer  {
     public void recieveRefund(int amount){
         this.funds += amount;
     }
+
+
 
 
 }
