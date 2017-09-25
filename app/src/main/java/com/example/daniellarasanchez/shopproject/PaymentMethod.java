@@ -15,9 +15,7 @@ public class PaymentMethod {
         this.paymentType = paymentType ;
     }
 
-   public void cashPaymentType(){
 
-   }
 
     public PaymentType getPaymentType(){
         return this.paymentType;

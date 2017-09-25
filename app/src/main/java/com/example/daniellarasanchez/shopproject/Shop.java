@@ -11,12 +11,7 @@ public class Shop  {
 
      ArrayList<Sale> sales;
      ArrayList<Refund> refunds;
-
-//    public void setStock(HashMap<Product product, Integer >, Integer newValue) {
-//        stock.put(product, newValue);
-//    }
-
-    HashMap<Product, Integer> stock;
+     HashMap<Product, Integer> stock;
      int funds;
 
 
@@ -104,10 +99,10 @@ public class Shop  {
 
 
 
-    public void canAddSale(Sale sale, Customer customer){
+    public void canAddSale(Sale sale, Customer customer, PaymentType paymentType){
         this.sales.add(sale);
 //        compareProducts(sale);
-        chargeCustomer(sale.getAmount(), customer);//this method already adds amount to the shop funds when charging customer.
+        chargeCustomer(sale.getAmount(), customer, paymentType  );//this method already adds amount to the shop funds when charging customer.
 
     }
     public void canAddRefund(Refund refund, Customer customer){
@@ -117,21 +112,17 @@ public class Shop  {
 
 
 
-    public void chargeCustomer(int amount, Customer customer){
-        customer.charge(amount);//this method calls the "hability" of customer to be charged.
-        this.funds += amount;
-        if(customer.choosePaymentType() != PaymentType.)
-        if(customer.getPaymentType() != PaymentType.CREDITCARD){
-//            customer.charge(amount);//this method calls the "hability" of customer to be charged.
-//            this.funds += amount;
-//        }else{
-//            PaymentType.CREDITCARD.addAmountToDebt(amount);//this method calls the "hability" of Paymentmethod to increase the debt.
-//            this.funds += amount;
-//        }
+
+    public void chargeCustomer(int amount, Customer customer, PaymentType paymentType){
+
+            if(paymentType != PaymentType.CREDITCARD){
+                customer.charge(amount);//this method calls the "hability" of customer to be charged.
+                this.funds += amount;
+            }else{
+                customer.charge(amount, paymentType.CREDITCARD);
+                this.funds += amount;
+            }
     }
-
-
-
     public void refundCustomer(int amount, Customer customer){
         customer.recieveRefund(amount);
         this.funds -= amount;

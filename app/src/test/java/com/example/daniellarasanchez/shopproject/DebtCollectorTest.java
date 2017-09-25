@@ -8,20 +8,22 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by daniellarasanchez on 25/09/2017.
  */
-//
-//public class DebtCollectorTest {
-//    PaymentType paymentType;
-//    Customer customer;
-//    DebtCollector debtCollector;
-//
-//
-//    @Before
-//    public void before(){
-//        customer = new Customer("Daniel", 1000, paymentType.CREDITCARD);
-//        debtCollector = new DebtCollector(paymentType.CREDITCARD, customer);
-//
-//    }
-//
+
+public class DebtCollectorTest {
+    PaymentType paymentType;
+    Customer customer;
+    DebtCollector debtCollector;
+
+
+    @Before
+    public void before(){
+        customer = new Customer("Daniel", 1000);
+        debtCollector = new DebtCollector();
+
+    }
+
+
+
 //    @Test
 //    public void canSetDebtToZero(){
 //        debtCollector.setNewDebt(0);
@@ -33,4 +35,4 @@ import static org.junit.Assert.assertEquals;
 //        debtCollector.setDebtToZero(customer, PaymentType.CREDITCARD);
 //        assertEquals(0, customer.getPaymentType().getDebt());
 //    }
-//}
+}

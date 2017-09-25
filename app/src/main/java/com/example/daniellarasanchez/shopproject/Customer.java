@@ -10,17 +10,17 @@ public class Customer  {
     private int funds;
     private String name;
     private ArrayList<PaymentMethod> paymentMethods;
+    private int debt;
 
 
     public Customer(String name, int funds){
         this.name = name;
         this.funds = funds;
         this.paymentMethods = new ArrayList<PaymentMethod>();
+        this.debt = 0;
     }
 
-    public PaymentType choosePaymentType(){
 
-    }
 
     public String getName(){
         return this.name;
@@ -30,34 +30,41 @@ public class Customer  {
         return this.funds;
     }
 
+    public int getDebt() {return this.debt;}
+
+    public  void setDebt(int newDebt){
+        this.debt = newDebt;
+    }
+
     public ArrayList<PaymentMethod> getPaymentMethods(){
         return this.paymentMethods;
     }
-
+//
     public void addPaymentMethods(PaymentMethod paymentMethod){
         this.paymentMethods.add(paymentMethod);
     }
 
-    public void setPaymentMethods(PaymentMethod paymentMethod){
-        this.paymentMethods.add(paymentMethod);
+
+
+
+    public void payOffDebt() {
+        if (this.funds >= this.debt) {
+            this.funds -= this.debt;
+            this.setDebt(0);
+        }
     }
-
-    public void setPaymentMethodCash(){
-        this.paymentMethods.setPaymentMethods(PaymentType.CASH);
-    }
-
-//    public PaymentType getPaymentType(){
-//        return this.paymentType;
-//    }
-
-//    public void payOffDebt(PaymentType creditCard){
-//        this.funds -= creditCard.debt;
-//    }
 
 
     public void charge(int amount){
-
         this.funds -= amount;
+    }
+
+    public void charge(int amount, PaymentType paymentType){
+        if(paymentType == paymentType.CREDITCARD){
+            this.debt += amount;
+        }else{
+            this.charge(amount);
+        }
     }
 
     public void recieveRefund(int amount){

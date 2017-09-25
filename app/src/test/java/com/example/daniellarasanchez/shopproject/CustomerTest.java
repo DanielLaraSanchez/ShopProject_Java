@@ -35,15 +35,30 @@ public class CustomerTest {
     }
 
     @Test
+    public void canChargeCustomer(){
+        customer.charge(50);
+        assertEquals(50, customer.getFunds());
+    }
+
+    @Test
+    public void canChargeCustomerCreditCard(){
+        customer.charge(50, PaymentType.CREDITCARD);
+        assertEquals(100, customer.getFunds());
+        assertEquals(50, customer.getDebt());
+
+    }
+    @Test
     public void canAddPaymentMethod(){
         customer.addPaymentMethods(cashPaymentMethod);
         assertEquals(1, customer.getPaymentMethods().size());
     }
+    @Test
+    public void canPayOffDebt(){
+        shop.canAddSale(sale1, customer1, PaymentType.CREDITCARD);
+        customer1.payOffDebt();
+        assertEquals(100, customer1.getFunds());
+        assertEquals(0, customer1.getDebt());
+    }
 
-//    @Test
-//    public void canPayOffDebt(){
-//        shop.canAddSale(sale1, customer1);
-//        customer1.payOffDebt(PaymentType.CREDITCARD);
-//        assertEquals(100, customer1.getFunds());
-//    }
+
 }

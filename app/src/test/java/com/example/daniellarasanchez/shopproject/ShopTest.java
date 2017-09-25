@@ -56,19 +56,26 @@ public class ShopTest {
     }
     @Test
     public void canAddSale() {
-        shop.canAddSale(sale1, customer);
+        shop.canAddSale(sale1, customer, PaymentType.CASH);
         assertEquals(sale1, shop.sales.get(0));
     }
     @Test
     public void canAddSaleIndex(){
-        shop.canAddSale(sale1, customer);
+        shop.canAddSale(sale1, customer, PaymentType.CASH );
         assertEquals(1, shop.getSales().size());
     }
 
     @Test
     public void canDecreaseFundsOfCustomerAfterSale(){
-        shop.chargeCustomer(120, customer);
+        shop.chargeCustomer(120, customer, PaymentType.CASH);
         assertEquals(880, customer.getFunds());
+    }
+
+    @Test
+    public void canIncreaseDebtOfCustomerAfterCreditSale(){
+        shop.chargeCustomer(120, customer, PaymentType.CREDITCARD);
+        assertEquals(1000, customer.getFunds());
+        assertEquals(120, customer.getDebt());
     }
 
 //    @Test
@@ -81,8 +88,8 @@ public class ShopTest {
 
     @Test
     public void getTotalOfSales(){
-        shop.canAddSale(sale1, customer);
-        shop.canAddSale(sale2, customer);
+        shop.canAddSale(sale1, customer, PaymentType.CASH);
+        shop.canAddSale(sale2, customer, PaymentType.CASH);
         assertEquals(543, shop.getTotalSales());
     }
 
@@ -97,20 +104,20 @@ public class ShopTest {
     public void getProfitOfShop(){
         shop.canAddRefund(refund1, customer);
         shop.canAddRefund(refund2, customer);
-        shop.canAddSale(sale1, customer);
-        shop.canAddSale(sale2, customer);
+        shop.canAddSale(sale1, customer, PaymentType.CASH);
+        shop.canAddSale(sale2, customer, PaymentType.CASH);
         assertEquals(333, shop.getProfitOfShop());
     }
 
     @Test
     public void canIncreaseFundsOfShopAfterSale(){
-        shop.chargeCustomer(120, customer);
+        shop.chargeCustomer(120, customer, PaymentType.CASH);
         assertEquals(120, shop.getFunds());
     }
 
     @Test
     public void canIncreaseFundsOfShopAfterSaleWithCreditCard(){
-        shop.chargeCustomer(120, customer2);
+        shop.chargeCustomer(120, customer2, PaymentType.CREDITCARD);
         assertEquals(120, shop.getFunds());
     }
 
@@ -138,6 +145,12 @@ public class ShopTest {
     public void subtractAmountFromShopAfterRefund(){
         shop.refundCustomer(120,customer);
         assertEquals(-120, shop.getFunds());
+    }
+
+    @Test
+    public void canAddStock(){
+        shop.addStock(product1, 9);
+        assertEquals(1, shop.getStock().size());
     }
 
 
