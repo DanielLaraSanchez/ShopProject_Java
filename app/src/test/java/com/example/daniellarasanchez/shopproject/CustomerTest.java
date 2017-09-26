@@ -17,7 +17,6 @@ public class CustomerTest {
     Customer customer1;
     Sale sale1;
     Shop shop;
-    PaymentMethod cashPaymentMethod;
     Product product;
     HashMap<Product, Integer> stock;
 
@@ -46,8 +45,6 @@ public class CustomerTest {
         sale1 = new Sale(100, product, 10);
         shop = new Shop();
 
-        cashPaymentMethod = new PaymentMethod(122322, PaymentType.CASH);
-
     }
 
 
@@ -70,11 +67,7 @@ public class CustomerTest {
         assertEquals(50, customer.getDebt());
 
     }
-    @Test
-    public void canAddPaymentMethod(){
-        customer.addPaymentMethods(cashPaymentMethod);
-        assertEquals(1, customer.getPaymentMethods().size());
-    }
+
     @Test
     public void canPayOffDebt(){
         shop.addStock(product, 10);

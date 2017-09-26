@@ -9,14 +9,12 @@ import java.util.ArrayList;
 public class Customer  {
     private int funds;
     private String name;
-    private ArrayList<PaymentMethod> paymentMethods;
     private int debt;
 
 
     public Customer(String name, int funds){
         this.name = name;
         this.funds = funds;
-        this.paymentMethods = new ArrayList<PaymentMethod>();
         this.debt = 0;
     }
 
@@ -35,16 +33,6 @@ public class Customer  {
     public  void setDebt(int newDebt){
         this.debt = newDebt;
     }
-
-    public ArrayList<PaymentMethod> getPaymentMethods(){
-        return this.paymentMethods;
-    }
-//
-    public void addPaymentMethods(PaymentMethod paymentMethod){
-        this.paymentMethods.add(paymentMethod);
-    }
-
-
 
 
     public void payOffDebt() {
