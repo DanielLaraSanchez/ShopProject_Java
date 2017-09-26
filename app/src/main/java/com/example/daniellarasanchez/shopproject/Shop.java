@@ -6,12 +6,16 @@ import java.util.HashMap;
 /**
  * Created by daniellarasanchez on 22/09/2017.
  */
+//
 
 public class Shop  {
 
      ArrayList<Sale> sales;
      ArrayList<Refund> refunds;
-     HashMap<Product, Integer> stock;
+
+
+
+    HashMap<Product, Integer> stock;
      int funds;
 
 
@@ -33,6 +37,31 @@ public class Shop  {
 //            }
 //        }
 //    }
+
+    public void setStock(HashMap<Product, Integer> stock) {
+        this.stock = stock;
+    }
+
+    public Integer getValueOfKey(Product product){
+        return this.stock.get(product);
+    }
+
+    public void setNewValueInHashMap(Product product, Integer newValue){
+        stock.put(product, newValue);
+    }
+
+    public void setValueOfHashMapAfterSale(Product product, Integer newValue){//hability of shop for updating the value of hashmap.
+        Integer s = stock.get(product);
+        stock.put(product, s -= newValue);
+
+    }
+
+
+//    public void setValueOfHashMap1(Sale sale, Product product) {
+//        this.sales.add(sale);
+//        setValueOfHashMapAfterSale(sale.getProduct(), sale.getQuantity());
+//    }
+
 
 
 
@@ -103,7 +132,7 @@ public class Shop  {
         this.sales.add(sale);
 //        compareProducts(sale);
         chargeCustomer(sale.getAmount(), customer, paymentType  );//this method already adds amount to the shop funds when charging customer.
-
+        setValueOfHashMapAfterSale(sale.getProduct(),  sale.getQuantity());
     }
     public void canAddRefund(Refund refund, Customer customer){
         this.refunds.add(refund);

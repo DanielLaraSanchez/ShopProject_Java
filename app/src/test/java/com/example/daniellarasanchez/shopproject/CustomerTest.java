@@ -3,6 +3,9 @@ package com.example.daniellarasanchez.shopproject;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -10,19 +13,39 @@ import static org.junit.Assert.assertEquals;
  */
 
 public class CustomerTest {
-    Customer customer;
+
     Customer customer1;
     Sale sale1;
     Shop shop;
     PaymentMethod cashPaymentMethod;
+    Product product;
+    HashMap<Product, Integer> stock;
+
+
+
+    Sale sale2;
+    Sale sale3;
+    Refund refund1;
+    Refund refund2;
+    ArrayList<Sale> sales;
+    ArrayList<Refund> refunds;
+
+    Customer customer;
+    Customer customer2;
+    Product product1;
 
 
     @Before
     public void before(){
+        sales = new ArrayList<>();
+        refunds = new ArrayList<>();
+        stock = new HashMap<>();
+        product = new Product("Flour", 10);
         customer = new Customer("Daniel", 100);
         customer1 = new Customer("Dan", 200);
-        sale1 = new Sale(100);
+        sale1 = new Sale(100, product, 10);
         shop = new Shop();
+
         cashPaymentMethod = new PaymentMethod(122322, PaymentType.CASH);
 
     }
@@ -54,11 +77,14 @@ public class CustomerTest {
     }
     @Test
     public void canPayOffDebt(){
+        shop.addStock(product, 10);
         shop.canAddSale(sale1, customer1, PaymentType.CREDITCARD);
         customer1.payOffDebt();
         assertEquals(100, customer1.getFunds());
         assertEquals(0, customer1.getDebt());
     }
+
+
 
 
 }

@@ -1,5 +1,7 @@
 package com.example.daniellarasanchez.shopproject;
 
+import java.util.HashMap;
+
 /**
  * Created by daniellarasanchez on 22/09/2017.
  */
@@ -11,6 +13,17 @@ package com.example.daniellarasanchez.shopproject;
 public class Runner {
     public static void main(String args[]){
         Shop shop = new Shop();
+        Customer customer = new Customer("Dani", 1000);
+        Product product = new Product("hola", 3);
+        Product product1 = new Product("adios", 2);
+        Sale sale = new Sale(100, product);
+        shop.canAddSale(sale, customer, PaymentType.CASH );
+        HashMap<Product, Integer> stock = new HashMap<>();
+        stock.put(product, 3);
+        stock.put(product1, 4);
+        System.out.println(stock.values());
+        System.out.println(stock.get(product));
+//        System.out.println(shop.setValueOfHashMap(sale.getProduct(), sale.getQuantity()));
 ////        Sale sale1 = new Sale(100, Product.POTATOS);;
 //        Customer customer1 = new Customer("Daniel", 2000, PaymentType.CREDITCARD);
 //

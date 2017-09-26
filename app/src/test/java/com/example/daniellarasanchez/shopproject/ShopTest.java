@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,18 +24,20 @@ public class ShopTest {
      Customer customer;
      Customer customer2;
      Product product1;
+     HashMap<Product, Integer> stock;
 
 
     @Before
     public void before(){
         product1 = new Product("Eggs", 9);
         sale1 = new Sale(200, product1, 1);
-        sale2 = new Sale(343);
+        sale2 = new Sale(343, product1, 1);
         sale3 = new Sale(200, new Product("Eggs", 9));
         refund1 = new Refund(100);
         refund2 = new Refund(110);
-        sales = new ArrayList<Sale>();
+        sales = new ArrayList<>();
         refunds = new ArrayList<>();
+        stock = new HashMap<Product, Integer>();
         shop = new Shop();
         customer = new Customer("Daniel", 1000);
         customer2 = new Customer("Daniel", 1000);
@@ -48,6 +51,30 @@ public class ShopTest {
 //        assertEquals(6, shop.getStock().values());
 //
 //    }
+    //TEST IF PAYMENT CASH AND DEBITCARD WORK PROPERLY!!!!!
+
+
+    @Test
+    public void canFinallyGetTheFuckingValueOrLongValueToBeMoreSpecific_Peace(){
+        shop.addStock(product1, 10);
+        assertEquals(10, shop.stock.get(product1).intValue());
+    }
+
+    @Test
+    public void canSetValueOfHashMap(){
+        shop.addStock(product1, 10);
+        shop.setNewValueInHashMap(product1, 4);
+        assertEquals(4, shop.stock.get(product1).longValue());
+    }
+
+    @Test
+    public void canUpdateStockAfterSale(){
+        shop.addStock(product1, 7);
+        shop.canAddSale(sale1, customer, PaymentType.CASH);
+
+        assertEquals(6, shop.stock.get(product1).longValue());
+    }
+
 
 
     @Test
@@ -56,11 +83,13 @@ public class ShopTest {
     }
     @Test
     public void canAddSale() {
+        shop.addStock(product1, 10);
         shop.canAddSale(sale1, customer, PaymentType.CASH);
         assertEquals(sale1, shop.sales.get(0));
     }
     @Test
     public void canAddSaleIndex(){
+        shop.addStock(product1, 10);
         shop.canAddSale(sale1, customer, PaymentType.CASH );
         assertEquals(1, shop.getSales().size());
     }
@@ -77,10 +106,10 @@ public class ShopTest {
         assertEquals(1000, customer.getFunds());
         assertEquals(120, customer.getDebt());
     }
-
+//
 //    @Test
 //    public void canAddDebtToCreditCardAfterSale(){
-//        shop.chargeCustomer(120, customer2);
+//        shop.chargeCustomer(120, customer2, PaymentType.CREDITCARD);
 //        assertEquals(120, PaymentType.CREDITCARD.getDebt());
 //    }
 
@@ -88,6 +117,7 @@ public class ShopTest {
 
     @Test
     public void getTotalOfSales(){
+        shop.addStock(product1, 10);
         shop.canAddSale(sale1, customer, PaymentType.CASH);
         shop.canAddSale(sale2, customer, PaymentType.CASH);
         assertEquals(543, shop.getTotalSales());
@@ -102,6 +132,7 @@ public class ShopTest {
 
     @Test
     public void getProfitOfShop(){
+        shop.addStock(product1, 10);
         shop.canAddRefund(refund1, customer);
         shop.canAddRefund(refund2, customer);
         shop.canAddSale(sale1, customer, PaymentType.CASH);
@@ -152,6 +183,8 @@ public class ShopTest {
         shop.addStock(product1, 9);
         assertEquals(1, shop.getStock().size());
     }
+
+
 
 
 
