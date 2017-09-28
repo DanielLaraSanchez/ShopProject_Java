@@ -69,6 +69,12 @@ public class CustomerTest {
     }
 
     @Test
+    public void canSetNewDebt(){
+        customer.setDebt(800);
+        assertEquals(800, customer.getDebt());
+    }
+
+    @Test
     public void canPayOffDebt(){
         shop.addStock(product, 10);
         shop.canAddSale(sale1, customer1, PaymentType.CREDITCARD);

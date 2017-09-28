@@ -11,11 +11,12 @@ import static org.junit.Assert.assertEquals;
 
 public class SaleTest {
     Sale sale;
-
+    Product product;
 
     @Before
     public void before() {
-        sale = new Sale(250);
+        sale = new Sale(250, product, 5 );
+        product = new Product("Rice", 2);
 
     }
 

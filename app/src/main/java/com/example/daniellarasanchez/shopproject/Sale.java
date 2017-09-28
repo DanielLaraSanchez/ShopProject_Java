@@ -21,11 +21,7 @@ public class Sale {
         this.product = product;
     }
 
-    public Sale(int amount){
-        this.amount = amount;
-        this.date = new Date();
 
-    }
 
     public Sale(int amount, Product product, Integer quantity){
         this.amount = amount;
